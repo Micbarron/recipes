@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add New Recipe</h1>
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+        {% if messages %}                            <!-- check if there are any messages -->
+            {% for message in messages %}            <!-- loop through the messages -->
+                <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    <form action="/recipes/edit/{{x.id}}" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="{{x.name}}"><br>
+        <label for="description">Description:</label><br>
+        <textarea name="description" id="description" cols="30" rows="10">{{x.description}}</textarea><br>
+        <label for="instructions">instructions:</label><br>
+        <textarea name="instructions" id="instructions" cols="40" rows="10">{{x.instructions}}</textarea><br>
+        <label for="made_on">Date Made On:</label><br>
+        <input type="date" name="made_on" id="made_on" value="{{x.made_on.strftime('%Y-%m-%d')}}"><br>
+        <label for="under30">Under 30 Minutes?</label><br>
+        <input type="radio" name="under30" id="YES" value="Yes" checked>
+        <label for="YES">Yes</label><br>
+        <input type="radio" name="under30" id="NO" value="No">
+        <label for="NO">No</label><br>
+
+        <input type="submit" value="Create">
+    </form>
+    
+
+    <a href="/success">Dashboard</a>
+    <a href="/logout">Logout</a>
+</body>
+</html>
